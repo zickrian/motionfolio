@@ -187,7 +187,8 @@ export const PROJECT_DETAILS_DATA = {
     links: {
       repo: "https://github.com/zickrian/LostItem-Project",
     },
-    notes: "Access Restricted: This website is only accessible using Udinus student email (@mhs.dinus.ac.id).",
+    notes:
+      "Access Restricted: This website is only accessible using Udinus student email (@mhs.dinus.ac.id).",
   },
   imageclas: {
     title: "Vegetable Image Classification",
@@ -271,6 +272,7 @@ export const PROJECT_DETAILS_DATA = {
       live: "https://baserealms.app/",
       repo: "https://github.com/zickrian/Base-Realms",
     },
-    notes: "Achievement: National Finalist - Base Indonesia Hackathon 2025. Track: Base Track. Team: Terra Bit (Firdaus Khotibul Zickrian & Gagah Athallah Fatha).",
+    notes:
+      "Achievement: National Finalist - Base Indonesia Hackathon 2025. Track: Base Track. Team: Terra Bit (Firdaus Khotibul Zickrian & Gagah Athallah Fatha).",
   },
 };

@@ -3,7 +3,8 @@ import ProjectCaseLayout from "../components/projects/ProjectCaseLayout";
 export const project = {
   title: "Vegetable Image Classification",
   category: "Computer Vision",
-  heroImg: "https://res.cloudinary.com/demlxsf08/image/upload/v1766490523/klasifikasi_gambar_tlsouc.png",
+  heroImg:
+    "https://res.cloudinary.com/demlxsf08/image/upload/v1766490523/klasifikasi_gambar_tlsouc.png",
   tagline:
     "A TensorFlow-based image classification app that recognizes various vegetable types from uploaded photos, complete with confidence scores and Top-5 predictions in an interactive UI.",
   year: "2025",
@@ -28,5 +29,12 @@ export const project = {
 };
 
 export default function ImageClasDetail({ onClose, mode }) {
-  return <ProjectCaseLayout project={project} onClose={onClose} closeLabel={mode === "modal" ? "Close" : "Back to Home"} mode={mode} />;
+  return (
+    <ProjectCaseLayout
+      project={project}
+      onClose={onClose}
+      closeLabel={mode === "modal" ? "Close" : "Back to Home"}
+      mode={mode}
+    />
+  );
 }

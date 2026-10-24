@@ -11,16 +11,16 @@ const INDICATOR_GAP = 48;
 const INDICATOR_INTRO_WIDTH = 500;
 
 // Hanya register sekali untuk menghindari konflik
-if (typeof window !== 'undefined' && !ScrollTrigger.isRegistered) {
+if (typeof window !== "undefined" && !ScrollTrigger.isRegistered) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 // Helper: inject Cloudinary automatic format & quality + width
 function cloudinarySrc(originalUrl, width) {
   try {
-    if (!originalUrl || typeof originalUrl !== 'string') return originalUrl;
-    if (!originalUrl.includes('/upload/')) return originalUrl;
-    return originalUrl.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
+    if (!originalUrl || typeof originalUrl !== "string") return originalUrl;
+    if (!originalUrl.includes("/upload/")) return originalUrl;
+    return originalUrl.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
   } catch (e) {
     return originalUrl;
   }
@@ -37,11 +37,11 @@ export default function ProjectGallery({ onOpenProject }) {
   const [enablePinnedScroll, setEnablePinnedScroll] = useState(true);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // GSAP pinned scroll only on desktop; mobile uses native horizontal scroll
     // to prevent vibration/shaking from touch events fighting GSAP transforms
-    const reducedMotionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reducedMotionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const updateMode = () => {
       const isMobile = window.innerWidth < 1024;
@@ -50,7 +50,8 @@ export default function ProjectGallery({ onOpenProject }) {
 
     updateMode();
 
-    if (reducedMotionMedia.addEventListener) reducedMotionMedia.addEventListener('change', updateMode);
+    if (reducedMotionMedia.addEventListener)
+      reducedMotionMedia.addEventListener("change", updateMode);
     else reducedMotionMedia.addListener(updateMode);
 
     // Also listen for resize to switch between mobile/desktop mode
@@ -59,12 +60,13 @@ export default function ProjectGallery({ onOpenProject }) {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(updateMode, 200);
     };
-    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
-      if (reducedMotionMedia.removeEventListener) reducedMotionMedia.removeEventListener('change', updateMode);
+      if (reducedMotionMedia.removeEventListener)
+        reducedMotionMedia.removeEventListener("change", updateMode);
       else reducedMotionMedia.removeListener(updateMode);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimer);
     };
   }, []);
@@ -92,7 +94,9 @@ export default function ProjectGallery({ onOpenProject }) {
       const sectionW = section.getBoundingClientRect().width;
       const total = track.scrollWidth - sectionW;
       const nextMaxScroll = Math.max(0, total);
-      setMaxScroll((prevMaxScroll) => (prevMaxScroll === nextMaxScroll ? prevMaxScroll : nextMaxScroll));
+      setMaxScroll((prevMaxScroll) =>
+        prevMaxScroll === nextMaxScroll ? prevMaxScroll : nextMaxScroll,
+      );
     };
 
     calc();
@@ -113,7 +117,7 @@ export default function ProjectGallery({ onOpenProject }) {
 
     // Mobile: visualViewport fires when browser toolbar shows/hides (changes innerHeight)
     if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleResize);
+      window.visualViewport.addEventListener("resize", handleResize);
     }
 
     let ro;
@@ -136,7 +140,7 @@ export default function ProjectGallery({ onOpenProject }) {
       clearTimeout(resizeTimeout);
       window.removeEventListener("resize", handleResize);
       if (window.visualViewport) {
-        window.visualViewport.removeEventListener('resize', handleResize);
+        window.visualViewport.removeEventListener("resize", handleResize);
       }
       if (ro) ro.disconnect();
     };
@@ -149,7 +153,7 @@ export default function ProjectGallery({ onOpenProject }) {
     if (!container) return;
 
     const updateActiveByScroll = () => {
-      const cards = container.querySelectorAll('[data-project-index]');
+      const cards = container.querySelectorAll("[data-project-index]");
       if (!cards.length) return;
 
       const viewportCenter = container.scrollLeft + container.clientWidth / 2;
@@ -157,7 +161,7 @@ export default function ProjectGallery({ onOpenProject }) {
       let closestDistance = Number.POSITIVE_INFINITY;
 
       cards.forEach((card) => {
-        const idx = Number(card.getAttribute('data-project-index') || 0);
+        const idx = Number(card.getAttribute("data-project-index") || 0);
         const cardCenter = card.offsetLeft + card.clientWidth / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
 
@@ -174,10 +178,10 @@ export default function ProjectGallery({ onOpenProject }) {
     };
 
     updateActiveByScroll();
-    container.addEventListener('scroll', updateActiveByScroll, { passive: true });
+    container.addEventListener("scroll", updateActiveByScroll, { passive: true });
 
     return () => {
-      container.removeEventListener('scroll', updateActiveByScroll);
+      container.removeEventListener("scroll", updateActiveByScroll);
     };
   }, [enablePinnedScroll]);
 
@@ -238,8 +242,11 @@ export default function ProjectGallery({ onOpenProject }) {
             0,
             Math.min(
               projectCount - 1,
-              Math.floor((Math.max(0, current - INDICATOR_INTRO_WIDTH + 100)) / (INDICATOR_CARD_WIDTH + INDICATOR_GAP))
-            )
+              Math.floor(
+                Math.max(0, current - INDICATOR_INTRO_WIDTH + 100) /
+                  (INDICATOR_CARD_WIDTH + INDICATOR_GAP),
+              ),
+            ),
           );
 
           if (nextActiveIndex !== activeProjectIndexRef.current) {
@@ -289,7 +296,8 @@ export default function ProjectGallery({ onOpenProject }) {
           </div>
 
           <h2 className="text-5xl font-black text-white uppercase leading-[0.92] tracking-tight">
-            Past<br />
+            Past
+            <br />
             <span className="text-lime-400">Explorations</span>
           </h2>
           <p className="mt-4 text-neutral-400 text-sm leading-6 max-w-sm">
@@ -300,13 +308,14 @@ export default function ProjectGallery({ onOpenProject }) {
         {/* Project Counter */}
         <div className="px-6 mb-6 flex items-center justify-between">
           <span className="font-mono text-xs text-white/30 uppercase tracking-[0.16em]">
-            {String(activeProjectIndex + 1).padStart(2, '0')} / {String(projectCount).padStart(2, '0')}
+            {String(activeProjectIndex + 1).padStart(2, "0")} /{" "}
+            {String(projectCount).padStart(2, "0")}
           </span>
           <div className="flex gap-1.5">
             {projects.map((_, i) => (
               <div
                 key={i}
-                className={`h-1 rounded-full transition-all duration-300 ${i === activeProjectIndex ? 'w-6 bg-lime-400' : 'w-1.5 bg-white/20'}`}
+                className={`h-1 rounded-full transition-all duration-300 ${i === activeProjectIndex ? "w-6 bg-lime-400" : "w-1.5 bg-white/20"}`}
               />
             ))}
           </div>
@@ -324,19 +333,21 @@ export default function ProjectGallery({ onOpenProject }) {
               onClick={() => onOpenProject?.(project)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => { if (e.key === "Enter") onOpenProject?.(project); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") onOpenProject?.(project);
+              }}
               className="project-card group relative w-[80vw] shrink-0 snap-center overflow-hidden rounded-lg border border-white/10 bg-neutral-950 cursor-pointer active:scale-[0.98] transition-transform"
               data-project-index={index}
-              style={{ WebkitTapHighlightColor: 'transparent', aspectRatio: '3/4' }}
+              style={{ WebkitTapHighlightColor: "transparent", aspectRatio: "3/4" }}
             >
               {/* Image */}
               <div className="absolute inset-0 overflow-hidden">
                 <picture>
                   <source
                     srcSet={[
-                      cloudinarySrc(project.img, 400) + ' 400w',
-                      cloudinarySrc(project.img, 800) + ' 800w',
-                    ].join(', ')}
+                      cloudinarySrc(project.img, 400) + " 400w",
+                      cloudinarySrc(project.img, 800) + " 800w",
+                    ].join(", ")}
                     sizes="80vw"
                   />
                   <img
@@ -375,7 +386,9 @@ export default function ProjectGallery({ onOpenProject }) {
 
                 {/* CTA arrow */}
                 <div className="mt-3 flex items-center gap-2 text-lime-400">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold">View Project</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold">
+                    View Project
+                  </span>
                   <ArrowUpRight size={14} strokeWidth={2.5} />
                 </div>
               </div>
@@ -390,7 +403,6 @@ export default function ProjectGallery({ onOpenProject }) {
   // ── DESKTOP LAYOUT (GSAP horizontal pinned scroll) ──
   return (
     <section ref={sectionRef} className="relative bg-neutral-900 overflow-hidden h-[100dvh]">
-
       {/* Section Header */}
       <Gsap.div
         initial={{ opacity: 0, y: 10 }}
@@ -407,10 +419,7 @@ export default function ProjectGallery({ onOpenProject }) {
 
       {/* Horizontal scroll track */}
       <div className="flex w-full h-[100dvh] items-center overflow-hidden">
-        <Gsap.div
-          ref={trackRef}
-          className="flex gap-12 px-24"
-        >
+        <Gsap.div ref={trackRef} className="flex gap-12 px-24">
           {/* Intro Card */}
           <Gsap.div
             initial={{ opacity: 0, x: -50 }}
@@ -419,7 +428,8 @@ export default function ProjectGallery({ onOpenProject }) {
             className="flex flex-col justify-center shrink-0 h-[70vh] w-[40vw]"
           >
             <h2 className="text-6xl lg:text-8xl font-black text-white uppercase leading-[0.92]">
-              Past<br />
+              Past
+              <br />
               <span className="text-lime-400">Explorations</span>
             </h2>
             <p className="mt-8 text-neutral-300 max-w-md text-lg leading-7">
@@ -441,26 +451,26 @@ export default function ProjectGallery({ onOpenProject }) {
               }}
               className="project-card group relative h-[70vh] w-[45vw] shrink-0 overflow-hidden rounded-[4px] border border-white/10 bg-neutral-900 transition-all duration-500 hover:border-lime-400/50 hover:shadow-[0_0_40px_rgba(163,230,53,0.1)] active:scale-[0.98] cursor-pointer"
               data-project-index={index}
-              style={{ WebkitTapHighlightColor: 'transparent' }}
+              style={{ WebkitTapHighlightColor: "transparent" }}
             >
               <div className="absolute inset-0 overflow-hidden bg-neutral-950">
                 <picture>
                   <source
                     srcSet={[
-                      cloudinarySrc(project.img, 400) + ' 400w',
-                      cloudinarySrc(project.img, 800) + ' 800w',
-                      cloudinarySrc(project.img, 1200) + ' 1200w',
-                    ].join(', ')}
+                      cloudinarySrc(project.img, 400) + " 400w",
+                      cloudinarySrc(project.img, 800) + " 800w",
+                      cloudinarySrc(project.img, 1200) + " 1200w",
+                    ].join(", ")}
                     sizes="45vw"
                   />
                   <img
                     draggable="false"
                     src={cloudinarySrc(project.img, 800)}
                     srcSet={[
-                      cloudinarySrc(project.img, 400) + ' 400w',
-                      cloudinarySrc(project.img, 800) + ' 800w',
-                      cloudinarySrc(project.img, 1200) + ' 1200w',
-                    ].join(', ')}
+                      cloudinarySrc(project.img, 400) + " 400w",
+                      cloudinarySrc(project.img, 800) + " 800w",
+                      cloudinarySrc(project.img, 1200) + " 1200w",
+                    ].join(", ")}
                     sizes="45vw"
                     alt={project.title}
                     loading={index === 0 ? "eager" : "lazy"}
@@ -484,12 +494,18 @@ export default function ProjectGallery({ onOpenProject }) {
                         {project.category}
                       </span>
                     </div>
-                    <h3 className="text-4xl lg:text-5xl font-black uppercase text-white tracking-tight leading-[1.1]">{project.title}</h3>
+                    <h3 className="text-4xl lg:text-5xl font-black uppercase text-white tracking-tight leading-[1.1]">
+                      {project.title}
+                    </h3>
                   </div>
 
                   {/* Floating Action Button */}
                   <div className="w-14 h-14 bg-white/10 border border-white/20 text-white flex items-center justify-center rounded-full shrink-0 group-hover:bg-lime-400 group-hover:text-black group-hover:border-lime-400 transition-all duration-300 shadow-lg">
-                    <ArrowUpRight size={24} strokeWidth={2} className="group-hover:rotate-45 transition-transform duration-300" />
+                    <ArrowUpRight
+                      size={24}
+                      strokeWidth={2}
+                      className="group-hover:rotate-45 transition-transform duration-300"
+                    />
                   </div>
                 </div>
               </div>
@@ -503,7 +519,9 @@ export default function ProjectGallery({ onOpenProject }) {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <div className="flex items-start">
-                  <span className="font-mono text-sm text-lime-400 font-bold mr-1 pt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">NO.</span>
+                  <span className="font-mono text-sm text-lime-400 font-bold mr-1 pt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    NO.
+                  </span>
                   <span className="font-mono text-5xl font-light text-white/20 tracking-[0.18em] group-hover:text-white/40 transition-colors duration-500">
                     0{project.id}
                   </span>
@@ -523,7 +541,7 @@ export default function ProjectGallery({ onOpenProject }) {
           return (
             <div
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${isActive ? 'w-8 bg-lime-400' : 'w-2 bg-white/30'}`}
+              className={`h-2 rounded-full transition-all duration-300 ${isActive ? "w-8 bg-lime-400" : "w-2 bg-white/30"}`}
             />
           );
         })}

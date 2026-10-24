@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'Space Grotesk', Menlo, Monaco, Consolas, monospace;
+  --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Space Grotesk", Menlo, Monaco, Consolas, monospace;
 }
 
 body {
@@ -15,7 +15,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "ss01" 1, "cv11" 1;
+  font-feature-settings:
+    "ss01" 1,
+    "cv11" 1;
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: transparent;
 }
@@ -67,7 +69,9 @@ h3,
 h4,
 h5,
 h6,
-:where(.font-black, .font-extrabold, .font-bold, .font-semibold):not(.font-mono):not(code):not(pre) {
+:where(.font-black, .font-extrabold, .font-bold, .font-semibold):not(.font-mono):not(code):not(
+    pre
+  ) {
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -151,7 +155,6 @@ html.lenis body {
 /* Hero background blob animations - CSS keeps infinite loops off the JS thread
    with pure CSS for zero JS overhead per frame */
 @keyframes blob-drift-1 {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -163,7 +166,6 @@ html.lenis body {
 }
 
 @keyframes blob-drift-2 {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -176,7 +178,6 @@ html.lenis body {
 
 /* Hero orb animations — GPU-composited CSS for zero JS overhead */
 @keyframes hero-orb-1 {
-
   0%,
   100% {
     transform: translate3d(-50%, -50%, 0) scale(1);
@@ -188,7 +189,6 @@ html.lenis body {
 }
 
 @keyframes hero-orb-2 {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -200,7 +200,6 @@ html.lenis body {
 }
 
 @keyframes hero-orb-3 {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -224,7 +223,6 @@ html.lenis body {
 
 /* Hero orbiting decoration float */
 @keyframes hero-float {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -265,7 +263,6 @@ html.lenis body {
 
 /* Reduce motion for users who prefer it - respects OS accessibility settings */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {

@@ -38,5 +38,12 @@ export const project = {
 };
 
 export default function QMealDetail({ onClose, mode }) {
-  return <ProjectCaseLayout project={project} onClose={onClose} closeLabel={mode === "modal" ? "Close" : "Back to Home"} mode={mode} />;
+  return (
+    <ProjectCaseLayout
+      project={project}
+      onClose={onClose}
+      closeLabel={mode === "modal" ? "Close" : "Back to Home"}
+      mode={mode}
+    />
+  );
 }

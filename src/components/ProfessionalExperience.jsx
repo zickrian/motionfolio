@@ -1,65 +1,66 @@
-import { useMemo, useState } from 'react';
-import { Gsap, GsapPresence } from '../utils/gsapAnimate';
+import { useMemo, useState } from "react";
+import { Gsap, GsapPresence } from "../utils/gsapAnimate";
 // Note: scroll-triggered entrance animations removed from this section intentionally
-import { Plus, Calendar, Building2, Sparkles, ArrowUpRight } from 'lucide-react';
+import { Plus, Calendar, Building2, Sparkles, ArrowUpRight } from "lucide-react";
 
 const experiences = [
   {
-    company: 'GDSC Udinus',
-    role: 'Developer Community',
-    period: 'Nov 2023 - Nov 2025',
-    impact: 'Contributed to 5+ technical discussions across 4 collaborative projects.',
-    stack: ['Community', 'Workshops', 'Collaboration'],
+    company: "GDSC Udinus",
+    role: "Developer Community",
+    period: "Nov 2023 - Nov 2025",
+    impact: "Contributed to 5+ technical discussions across 4 collaborative projects.",
+    stack: ["Community", "Workshops", "Collaboration"],
     description: [
-      'Actively participated in workshops, technical events, and collaborative learning sessions.',
-      'Contributed insights around development and analytics in community-driven projects.',
+      "Actively participated in workshops, technical events, and collaborative learning sessions.",
+      "Contributed insights around development and analytics in community-driven projects.",
     ],
   },
   {
-    company: 'Blockvizo',
-    role: 'Data Analyst',
-    period: 'Jun 2024 - Jul 2025',
-    impact: 'Improved forecasting accuracy by 35% and cut analysis time by 40%.',
-    stack: ['Data Analysis', 'Dashboards', 'Web3 Analytics', 'Predictive Modeling'],
+    company: "Blockvizo",
+    role: "Data Analyst",
+    period: "Jun 2024 - Jul 2025",
+    impact: "Improved forecasting accuracy by 35% and cut analysis time by 40%.",
+    stack: ["Data Analysis", "Dashboards", "Web3 Analytics", "Predictive Modeling"],
     description: [
-      'Processed 50,000+ game hash history records to model item-drop probability behavior.',
-      'Built actionable dashboards for decentralized projects, enabling faster and more confident decisions.',
-      'Specialized in predictive airdrop and winning probability analysis across 10+ Web3 ecosystems.',
+      "Processed 50,000+ game hash history records to model item-drop probability behavior.",
+      "Built actionable dashboards for decentralized projects, enabling faster and more confident decisions.",
+      "Specialized in predictive airdrop and winning probability analysis across 10+ Web3 ecosystems.",
     ],
   },
   {
-    company: 'ASAH (led by Dicoding x Accenture)',
-    role: 'Machine Learning Cohort',
-    period: 'Aug 2025 - Jan 2026',
-    impact: 'Served as project manager during the capstone phase and improved team execution by 70%.',
-    stack: ['Project Leadership', 'ML Product', 'React', 'Stakeholder Sync'],
+    company: "ASAH (led by Dicoding x Accenture)",
+    role: "Machine Learning Cohort",
+    period: "Aug 2025 - Jan 2026",
+    impact:
+      "Served as project manager during the capstone phase and improved team execution by 70%.",
+    stack: ["Project Leadership", "ML Product", "React", "Stakeholder Sync"],
     description: [
-      'Acted as project manager during capstone, leading a cross-functional team of 5 machine learning engineers and React developers.',
-      'Managed the development of a banking sales prediction portal to prioritize high-probability leads and reduce low-value outreach.',
-      'Coordinated timelines and technical workflows across functions to improve delivery speed and reliability.',
+      "Acted as project manager during capstone, leading a cross-functional team of 5 machine learning engineers and React developers.",
+      "Managed the development of a banking sales prediction portal to prioritize high-probability leads and reduce low-value outreach.",
+      "Coordinated timelines and technical workflows across functions to improve delivery speed and reliability.",
     ],
   },
   {
-    company: 'Programming Lab',
-    role: 'Lab Assistant',
-    period: 'Aug 2025 - Present',
-    impact: 'Mentored 110+ junior students through practical engineering sessions.',
-    stack: ['Teaching', 'Mentorship', 'Software Fundamentals'],
+    company: "Programming Lab",
+    role: "Lab Assistant",
+    period: "Aug 2025 - Present",
+    impact: "Mentored 110+ junior students through practical engineering sessions.",
+    stack: ["Teaching", "Mentorship", "Software Fundamentals"],
     description: [
-      'Assisted in 3+ weekly academic lab sessions for programming and software engineering courses.',
-      'Mentored around 110 junior students in problem solving, practical exercises, and core programming concepts.',
+      "Assisted in 3+ weekly academic lab sessions for programming and software engineering courses.",
+      "Mentored around 110 junior students in problem solving, practical exercises, and core programming concepts.",
     ],
   },
   {
-    company: 'PIJAK (led by Dicoding x IBM)',
-    role: 'AI Engineer Cohort',
-    period: 'Jan 2026 - Present',
-    impact: 'Selected participant in the PIJAK AI Engineer cohort.',
-    stack: ['Python', 'Generative AI', 'Deep Learning', 'AI Ethics'],
+    company: "PIJAK (led by Dicoding x IBM)",
+    role: "AI Engineer Cohort",
+    period: "Jan 2026 - Present",
+    impact: "Selected participant in the PIJAK AI Engineer cohort.",
+    stack: ["Python", "Generative AI", "Deep Learning", "AI Ethics"],
     description: [
-      'Joined an intensive AI Engineer cohort focused on Generative AI, Deep Learning, and AI Ethics.',
-      'Developing advanced AI solutions with Python and industry-standard practices from the IBM SkillsBuild curriculum.',
-      'Building capstone-ready systems for real-world AI implementation challenges.',
+      "Joined an intensive AI Engineer cohort focused on Generative AI, Deep Learning, and AI Ethics.",
+      "Developing advanced AI solutions with Python and industry-standard practices from the IBM SkillsBuild curriculum.",
+      "Building capstone-ready systems for real-world AI implementation challenges.",
     ],
   },
 ];
@@ -77,7 +78,9 @@ const ExperienceItem = ({ experience, isExpanded, onToggle, index }) => {
       <div className="absolute left-[15px] top-0 h-full w-px bg-black/[0.08]" />
 
       <div className="relative pl-8 min-w-0">
-        <span className={`absolute left-[10px] top-8 h-[11px] w-[11px] rounded-full border ${isExpanded ? 'border-lime-500 bg-lime-500' : 'border-black/25 bg-[#FAF9F6]'}`} />
+        <span
+          className={`absolute left-[10px] top-8 h-[11px] w-[11px] rounded-full border ${isExpanded ? "border-lime-500 bg-lime-500" : "border-black/25 bg-[#FAF9F6]"}`}
+        />
 
         <button
           onClick={onToggle}
@@ -115,7 +118,7 @@ const ExperienceItem = ({ experience, isExpanded, onToggle, index }) => {
             <Gsap.div
               animate={{ rotate: isExpanded ? 45 : 0 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className={`mt-1 w-10 h-10 shrink-0 rounded-full border flex items-center justify-center ${isExpanded ? 'border-black bg-black text-white' : 'border-black/20 text-black/60'}`}
+              className={`mt-1 w-10 h-10 shrink-0 rounded-full border flex items-center justify-center ${isExpanded ? "border-black bg-black text-white" : "border-black/20 text-black/60"}`}
             >
               <Plus className="w-4.5 h-4.5" strokeWidth={1.8} />
             </Gsap.div>
@@ -126,18 +129,21 @@ const ExperienceItem = ({ experience, isExpanded, onToggle, index }) => {
           {isExpanded && (
             <Gsap.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
+              animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{
                 height: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
-                opacity: { duration: 0.22, ease: 'easeOut' },
+                opacity: { duration: 0.22, ease: "easeOut" },
               }}
               className="overflow-hidden"
             >
               <div className="mt-2 ml-0 rounded-[6px] border border-black/[0.08] bg-[#F7F7F3] px-5 md:px-7 py-5 md:py-6">
                 <ul className="space-y-3 max-w-3xl">
                   {experience.description.map((point) => (
-                    <li key={point} className="flex items-start gap-2.5 text-black/60 font-light text-sm md:text-[15px] leading-relaxed">
+                    <li
+                      key={point}
+                      className="flex items-start gap-2.5 text-black/60 font-light text-sm md:text-[15px] leading-relaxed"
+                    >
                       <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
                       <span>{point}</span>
                     </li>
@@ -174,15 +180,18 @@ const ProfessionalExperience = () => {
     const firstYear = startYears.length ? Math.min(...startYears) : new Date().getFullYear();
 
     return [
-      { label: 'Total Roles', value: String(roles).padStart(2, '0') },
-      { label: 'Active Now', value: String(activeNow).padStart(2, '0') },
-      { label: 'Since', value: String(firstYear) },
-      { label: 'Organizations', value: String(organizations).padStart(2, '0') },
+      { label: "Total Roles", value: String(roles).padStart(2, "0") },
+      { label: "Active Now", value: String(activeNow).padStart(2, "0") },
+      { label: "Since", value: String(firstYear) },
+      { label: "Organizations", value: String(organizations).padStart(2, "0") },
     ];
   }, []);
 
   return (
-    <section id="experience-section" className="pt-20 md:pt-24 pb-24 md:pb-32 w-full relative bg-[#FAF9F6] overflow-hidden overflow-x-clip">
+    <section
+      id="experience-section"
+      className="pt-20 md:pt-24 pb-24 md:pb-32 w-full relative bg-[#FAF9F6] overflow-hidden overflow-x-clip"
+    >
       <div className="absolute inset-0 pointer-events-none select-none">
         <div className="absolute right-0 top-20 w-[460px] h-[460px] bg-black/[0.025] rounded-full blur-[100px]" />
       </div>
@@ -205,21 +214,31 @@ const ProfessionalExperience = () => {
             </h2>
 
             <p className="mt-5 text-[14px] md:text-[15px] font-light leading-[1.8] text-black/60 max-w-[320px]">
-              Selected roles across AI cohorts, data analytics, and mentoring. Each step adds stronger delivery habits, leadership, and product clarity.
+              Selected roles across AI cohorts, data analytics, and mentoring. Each step adds
+              stronger delivery habits, leadership, and product clarity.
             </p>
 
             <div className="mt-7 grid grid-cols-2 gap-2.5">
               {statCards.map((stat) => (
-                <div key={stat.label} className="border border-black/[0.09] bg-white rounded-[4px] px-3.5 py-3.5">
-                  <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-black/38">{stat.label}</p>
-                  <p className="mt-1.5 text-[22px] leading-none font-black tracking-tight text-black">{stat.value}</p>
+                <div
+                  key={stat.label}
+                  className="border border-black/[0.09] bg-white rounded-[4px] px-3.5 py-3.5"
+                >
+                  <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-black/38">
+                    {stat.label}
+                  </p>
+                  <p className="mt-1.5 text-[22px] leading-none font-black tracking-tight text-black">
+                    {stat.value}
+                  </p>
                 </div>
               ))}
             </div>
 
             <div className="mt-6 flex items-center gap-2 text-black/42">
               <Sparkles className="w-3.5 h-3.5" />
-              <p className="font-mono text-[9px] uppercase tracking-[0.16em]">Career timeline - expand each role</p>
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em]">
+                Career timeline - expand each role
+              </p>
             </div>
           </aside>
 

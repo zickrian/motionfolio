@@ -8,9 +8,7 @@ function ScrollToTop() {
   const location = useLocation();
   const navType = useNavigationType();
   const { pathname, search } = location;
-  const isProjectModal =
-    pathname.startsWith('/projects/') &&
-    location.state?.backgroundLocation;
+  const isProjectModal = pathname.startsWith("/projects/") && location.state?.backgroundLocation;
 
   // useLayoutEffect untuk memastikan scroll terjadi SEBELUM render
   useLayoutEffect(() => {
@@ -21,7 +19,7 @@ function ScrollToTop() {
 
     // Cek apakah ada query param scrollTo
     const params = new URLSearchParams(search);
-    const hasScrollTo = params.get('scrollTo');
+    const hasScrollTo = params.get("scrollTo");
 
     // Jika modal project di atas home, biarkan state scroll home tetap aktif
     if (isProjectModal) {
@@ -29,16 +27,16 @@ function ScrollToTop() {
     }
 
     // Jika navigasi ke halaman project fallback (bukan modal), cleanup Lenis dan ScrollTrigger
-    if (pathname !== '/') {
+    if (pathname !== "/") {
       import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
         if (cancelled) return;
 
         // Disable CSS scroll-behavior smooth untuk mencegah animasi scroll
         if (document.documentElement) {
-          document.documentElement.style.scrollBehavior = 'auto';
+          document.documentElement.style.scrollBehavior = "auto";
         }
         if (document.body) {
-          document.body.style.scrollBehavior = 'auto';
+          document.body.style.scrollBehavior = "auto";
         }
 
         // Destroy Lenis instance TERLEBIH DAHULU untuk mencegah smooth scroll
@@ -52,7 +50,7 @@ function ScrollToTop() {
         }
 
         // Kill semua ScrollTrigger instances
-        ScrollTrigger.getAll().forEach(st => {
+        ScrollTrigger.getAll().forEach((st) => {
           try {
             st.kill();
           } catch (e) {
@@ -75,10 +73,10 @@ function ScrollToTop() {
       // Home page logic
       // Kembalikan smooth scroll behavior untuk home page
       if (document.documentElement) {
-        document.documentElement.style.scrollBehavior = '';
+        document.documentElement.style.scrollBehavior = "";
       }
       if (document.body) {
-        document.body.style.scrollBehavior = '';
+        document.body.style.scrollBehavior = "";
       }
 
       // JANGAN scroll ke atas jika ada query param scrollTo

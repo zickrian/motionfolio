@@ -43,101 +43,99 @@
 // terminal command, and the AI assistant all resolve to the same project.
 
 export const EXAMPLE_PORTFOLIO_DATA = {
-    // ── Basic identity. Shown across the site and used by the AI assistant. ──
-    profile: {
-        name: "Your Name",
-        role: "Your Role / Headline",
-        bio: "One or two sentences about who you are and what you build. Keep it punchy.",
-        location: "City, Country",
-        email: "you@example.com",
-        socials: {
-            github: "https://github.com/your-username",
-            linkedin: "https://linkedin.com/in/your-username",
-            // Add more if you like — make sure the component that renders socials
-            // (e.g. Footer / HeroSection) reads the keys you add here.
-        },
+  // ── Basic identity. Shown across the site and used by the AI assistant. ──
+  profile: {
+    name: "Your Name",
+    role: "Your Role / Headline",
+    bio: "One or two sentences about who you are and what you build. Keep it punchy.",
+    location: "City, Country",
+    email: "you@example.com",
+    socials: {
+      github: "https://github.com/your-username",
+      linkedin: "https://linkedin.com/in/your-username",
+      // Add more if you like — make sure the component that renders socials
+      // (e.g. Footer / HeroSection) reads the keys you add here.
     },
+  },
 
-    // ── Work, organization, education, or volunteering history. ──
-    // Each entry: { title, period, description: string[] }
-    experience: [
-        {
-            title: "Job Title — Company / Organization",
-            period: "Jan 2024 - Present",
-            description: [
-                "What you do / did, with concrete outcomes when possible.",
-                "A second bullet highlighting impact (numbers help: 'improved X by 30%').",
-            ],
-        },
-        {
-            title: "Previous Role — Company",
-            period: "2022 - 2024",
-            description: [
-                "A short, results-oriented description of your responsibilities.",
-            ],
-        },
-    ],
+  // ── Work, organization, education, or volunteering history. ──
+  // Each entry: { title, period, description: string[] }
+  experience: [
+    {
+      title: "Job Title — Company / Organization",
+      period: "Jan 2024 - Present",
+      description: [
+        "What you do / did, with concrete outcomes when possible.",
+        "A second bullet highlighting impact (numbers help: 'improved X by 30%').",
+      ],
+    },
+    {
+      title: "Previous Role — Company",
+      period: "2022 - 2024",
+      description: ["A short, results-oriented description of your responsibilities."],
+    },
+  ],
 
-    // ── Skills grouped by `category`. The AI assistant groups these by category. ──
-    // Each entry: { name, category }
-    techStack: [
-        { name: "JavaScript", category: "Language" },
-        { name: "TypeScript", category: "Language" },
-        { name: "React", category: "Frontend" },
-        { name: "Next.js", category: "Frontend" },
-        { name: "Tailwind CSS", category: "Frontend" },
-        { name: "Node.js", category: "Backend" },
-        { name: "PostgreSQL", category: "Database" },
-        { name: "Docker", category: "DevOps" },
-        { name: "Figma", category: "Design" },
-    ],
+  // ── Skills grouped by `category`. The AI assistant groups these by category. ──
+  // Each entry: { name, category }
+  techStack: [
+    { name: "JavaScript", category: "Language" },
+    { name: "TypeScript", category: "Language" },
+    { name: "React", category: "Frontend" },
+    { name: "Next.js", category: "Frontend" },
+    { name: "Tailwind CSS", category: "Frontend" },
+    { name: "Node.js", category: "Backend" },
+    { name: "PostgreSQL", category: "Database" },
+    { name: "Docker", category: "DevOps" },
+    { name: "Figma", category: "Design" },
+  ],
 
-    // ── Short project summaries. ──
-    // For full case studies (images, features, links), also edit
-    // `projectMeta.js` (gallery cards) and `projectDetailsData.js` (details),
-    // keeping the same `slug`.
-    projects: [
-        {
-            slug: "example-project-one",
-            title: "Example Project One",
-            category: "Web Application",
-            description: "A one-line description of what this project does.",
-        },
-        {
-            slug: "example-project-two",
-            title: "Example Project Two",
-            category: "Mobile / API / etc.",
-            description: "Another short description. Swap in your real work.",
-        },
-    ],
+  // ── Short project summaries. ──
+  // For full case studies (images, features, links), also edit
+  // `projectMeta.js` (gallery cards) and `projectDetailsData.js` (details),
+  // keeping the same `slug`.
+  projects: [
+    {
+      slug: "example-project-one",
+      title: "Example Project One",
+      category: "Web Application",
+      description: "A one-line description of what this project does.",
+    },
+    {
+      slug: "example-project-two",
+      title: "Example Project Two",
+      category: "Mobile / API / etc.",
+      description: "Another short description. Swap in your real work.",
+    },
+  ],
 
-    // ── Awards, hackathons, competitions. Optional — leave [] if none. ──
-    // Each entry shape matches what the AI assistant serializes:
-    //   { title, project, description, team, track, techStack[], links{} }
-    achievements: [
-        {
-            title: "Example Hackathon Finalist — 2025",
-            project: "Project Name",
-            description: "What you built and why it stood out.",
-            team: "Team Name (your name & teammates)",
-            track: "Track / Category",
-            techStack: ["React", "Node.js", "PostgreSQL"],
-            links: {
-                live: "https://example.com",
-                github: "https://github.com/your-username/your-repo",
-                devfolio: "", // optional; leave empty to hide
-            },
-        },
-    ],
+  // ── Awards, hackathons, competitions. Optional — leave [] if none. ──
+  // Each entry shape matches what the AI assistant serializes:
+  //   { title, project, description, team, track, techStack[], links{} }
+  achievements: [
+    {
+      title: "Example Hackathon Finalist — 2025",
+      project: "Project Name",
+      description: "What you built and why it stood out.",
+      team: "Team Name (your name & teammates)",
+      track: "Track / Category",
+      techStack: ["React", "Node.js", "PostgreSQL"],
+      links: {
+        live: "https://example.com",
+        github: "https://github.com/your-username/your-repo",
+        devfolio: "", // optional; leave empty to hide
+      },
+    },
+  ],
 
-    // ── High-level capabilities / specializations. Shown as a list. ──
-    capabilities: [
-        "Frontend Development",
-        "UI / UX Implementation",
-        "API Design",
-        "Performance Optimization",
-        "Accessibility",
-    ],
+  // ── High-level capabilities / specializations. Shown as a list. ──
+  capabilities: [
+    "Frontend Development",
+    "UI / UX Implementation",
+    "API Design",
+    "Performance Optimization",
+    "Accessibility",
+  ],
 };
 
 // Convenience alias so you can do a drop-in swap by re-exporting as PORTFOLIO_DATA:

@@ -27,15 +27,17 @@ export const project = {
   links: {
     repo: "https://github.com/zickrian/LostItem-Project",
   },
-  notes: "Access Restricted: This website is only accessible using Udinus student email (@mhs.dinus.ac.id)."
+  notes:
+    "Access Restricted: This website is only accessible using Udinus student email (@mhs.dinus.ac.id).",
 };
 
 const accessNotice = (
   <div className="mb-10 border-4 border-black bg-lime-400 p-8">
     <h2 className="text-3xl md:text-4xl font-black uppercase mb-4">Restricted Access</h2>
     <p className="text-lg font-medium leading-relaxed">
-      This website is only accessible using a Udinus student email (@mhs.dinus.ac.id). The authentication system is designed
-      to maintain security and platform relevance within the campus environment.
+      This website is only accessible using a Udinus student email (@mhs.dinus.ac.id). The
+      authentication system is designed to maintain security and platform relevance within the
+      campus environment.
     </p>
   </div>
 );

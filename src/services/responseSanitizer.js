@@ -33,13 +33,13 @@ function shouldDropLine(line) {
 }
 
 export function sanitizeAssistantResponse(rawText) {
-  if (!rawText || typeof rawText !== 'string') return '';
+  if (!rawText || typeof rawText !== "string") return "";
 
   const cleaned = rawText
-    .split('\n')
+    .split("\n")
     .filter((line) => !shouldDropLine(line))
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
     .trim();
 
   return cleaned;

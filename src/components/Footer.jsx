@@ -1,9 +1,9 @@
-import { memo, useEffect, useRef } from 'react';
-import { Gsap } from '../utils/gsapAnimate';
-import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
-import { exponentialEaseOut } from '../utils/easing';
+import { memo, useEffect, useRef } from "react";
+import { Gsap } from "../utils/gsapAnimate";
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
+import { exponentialEaseOut } from "../utils/easing";
 
-const DiscordIcon = ({ className = '', size = 16 }) => (
+const DiscordIcon = ({ className = "", size = 16 }) => (
   <svg
     width={size}
     height={size}
@@ -23,16 +23,16 @@ const Footer = memo(function Footer() {
     const target = document.getElementById(sectionId);
     if (!target) return;
 
-    if (window.lenisInstance && typeof window.lenisInstance.scrollTo === 'function') {
+    if (window.lenisInstance && typeof window.lenisInstance.scrollTo === "function") {
       window.lenisInstance.scrollTo(target, {
         offset: -24,
         duration: 1.5,
-        easing: exponentialEaseOut
+        easing: exponentialEaseOut,
       });
       return;
     }
 
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   // Direct DOM update for the clock — avoids React re-render every second
@@ -40,12 +40,12 @@ const Footer = memo(function Footer() {
     const updateTime = () => {
       if (!timeRef.current) return;
       const now = new Date();
-      timeRef.current.textContent = now.toLocaleTimeString('en-US', {
+      timeRef.current.textContent = now.toLocaleTimeString("en-US", {
         hour12: false,
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZoneName: 'short'
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short",
       });
     };
     updateTime();
@@ -54,14 +54,21 @@ const Footer = memo(function Footer() {
   }, []);
 
   return (
-    <footer id="contact-section" className="bg-[#0A0A0A] text-white pt-20 md:pt-24 pb-12 w-full relative overflow-hidden">
+    <footer
+      id="contact-section"
+      className="bg-[#0A0A0A] text-white pt-20 md:pt-24 pb-12 w-full relative overflow-hidden"
+    >
       {/* Subtle Matrix BG */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
       />
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 relative z-10 flex flex-col justify-between min-h-[50vh]">
-
         {/* ── SECTION HEADER ── */}
         <Gsap.div
           initial={{ opacity: 0, y: 10 }}
@@ -71,14 +78,13 @@ const Footer = memo(function Footer() {
         >
           <div className="w-2 h-2 bg-lime-400 rounded-[2px] animate-pulse" />
           <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] md:tracking-[0.26em] text-white/40">
-            {'// INITIALIZE_CONTACT'}
+            {"// INITIALIZE_CONTACT"}
           </span>
           <div className="flex-1 h-[1px] bg-white/10" />
         </Gsap.div>
 
         {/* Main Grid Layout */}
         <div className="flex flex-col lg:flex-row justify-between gap-12 md:gap-16 lg:gap-8 mb-20 md:mb-24">
-
           {/* Left: Huge Name & Status */}
           <div className="lg:w-1/2 flex flex-col justify-between">
             <div>
@@ -87,23 +93,25 @@ const Footer = memo(function Footer() {
                 <span className="text-lime-400 transform inline-block italic pr-4">CONNECT.</span>
               </h2>
               <p className="font-sans text-sm md:text-base text-white/60 max-w-md leading-7 md:leading-8">
-                Feel free to reach out for collaborations, system architecture discussions, or just to say hello. Always open to exploring new opportunities.
+                Feel free to reach out for collaborations, system architecture discussions, or just
+                to say hello. Always open to exploring new opportunities.
               </p>
             </div>
           </div>
 
           {/* Right: Connect & Navigation */}
           <div className="lg:w-1/2 flex flex-col sm:flex-row gap-12 sm:gap-16 lg:justify-end">
-
             {/* Navigation */}
             <div className="flex flex-col gap-4">
-              <span className="font-mono text-[10px] text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] mb-4 border-l-2 border-white/20 pl-3">Sitemap</span>
+              <span className="font-mono text-[10px] text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] mb-4 border-l-2 border-white/20 pl-3">
+                Sitemap
+              </span>
 
               {[
-                { label: 'About', id: 'about-section' },
-                { label: 'Projects', id: 'project-section' },
-                { label: 'Experience', id: 'experience-section' },
-                { label: 'Capabilities', id: 'capabilities-section' }
+                { label: "About", id: "about-section" },
+                { label: "Projects", id: "project-section" },
+                { label: "Experience", id: "experience-section" },
+                { label: "Capabilities", id: "capabilities-section" },
               ].map((item) => (
                 <button
                   key={item.label}
@@ -121,12 +129,22 @@ const Footer = memo(function Footer() {
 
             {/* Connect Links */}
             <div className="flex flex-col gap-4 min-w-[200px]">
-              <span className="font-mono text-[10px] text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] mb-4 border-l-2 border-lime-400 pl-3">Networks</span>
+              <span className="font-mono text-[10px] text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] mb-4 border-l-2 border-lime-400 pl-3">
+                Networks
+              </span>
 
               {[
-                { label: 'Email', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=firdauskhotibulzickrian@gmail.com', icon: Mail },
-                { label: 'GitHub', href: 'https://github.com/zickrian', icon: Github },
-                { label: 'LinkedIn', href: 'https://www.linkedin.com/in/firdauskhotibulzickrian/', icon: Linkedin },
+                {
+                  label: "Email",
+                  href: "https://mail.google.com/mail/?view=cm&fs=1&to=firdauskhotibulzickrian@gmail.com",
+                  icon: Mail,
+                },
+                { label: "GitHub", href: "https://github.com/zickrian", icon: Github },
+                {
+                  label: "LinkedIn",
+                  href: "https://www.linkedin.com/in/firdauskhotibulzickrian/",
+                  icon: Linkedin,
+                },
               ].map((link) => (
                 <a
                   key={link.label}
@@ -136,10 +154,18 @@ const Footer = memo(function Footer() {
                   className="group flex items-center justify-between border border-white/10 bg-[#111111] hover:bg-lime-400 hover:border-lime-400 transition-colors duration-300 p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <link.icon size={16} className="text-white/40 group-hover:text-black transition-colors" />
-                    <span className="font-mono text-xs md:text-sm font-bold uppercase text-white/80 group-hover:text-black tracking-[0.14em] md:tracking-[0.2em] transition-colors">{link.label}</span>
+                    <link.icon
+                      size={16}
+                      className="text-white/40 group-hover:text-black transition-colors"
+                    />
+                    <span className="font-mono text-xs md:text-sm font-bold uppercase text-white/80 group-hover:text-black tracking-[0.14em] md:tracking-[0.2em] transition-colors">
+                      {link.label}
+                    </span>
                   </div>
-                  <ArrowUpRight size={14} className="text-white/20 group-hover:text-black transition-colors" />
+                  <ArrowUpRight
+                    size={14}
+                    className="text-white/20 group-hover:text-black transition-colors"
+                  />
                 </a>
               ))}
 
@@ -152,7 +178,10 @@ const Footer = memo(function Footer() {
                 title="Open Discord profile"
               >
                 <div className="flex items-center gap-3">
-                  <DiscordIcon className="text-white/40 group-hover:text-black transition-colors" size={16} />
+                  <DiscordIcon
+                    className="text-white/40 group-hover:text-black transition-colors"
+                    size={16}
+                  />
                   <div className="flex flex-col items-start gap-1">
                     <span className="font-mono text-xs md:text-sm font-bold uppercase tracking-[0.14em] md:tracking-[0.2em] leading-none transition-colors text-white/80 group-hover:text-black">
                       Discord
@@ -162,10 +191,12 @@ const Footer = memo(function Footer() {
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight size={14} className="text-white/20 group-hover:text-black transition-colors" />
+                <ArrowUpRight
+                  size={14}
+                  className="text-white/20 group-hover:text-black transition-colors"
+                />
               </a>
             </div>
-
           </div>
         </div>
 
@@ -178,7 +209,10 @@ const Footer = memo(function Footer() {
             </div>
           </div>
 
-          <div ref={timeRef} className="font-mono text-[10px] md:text-xs text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] tabular-nums text-center order-first md:order-none opacity-50">
+          <div
+            ref={timeRef}
+            className="font-mono text-[10px] md:text-xs text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] tabular-nums text-center order-first md:order-none opacity-50"
+          >
             00:00:00 LOCAL
           </div>
 
@@ -186,7 +220,6 @@ const Footer = memo(function Footer() {
             &copy; {new Date().getFullYear()} ZICKRIAN. ALL RIGHTS RESERVED.
           </div>
         </div>
-
       </div>
     </footer>
   );

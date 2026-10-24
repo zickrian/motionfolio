@@ -1,5 +1,5 @@
-import { PROJECT_META } from '../data/projectMeta';
-import { SECTION_REGISTRY } from '../data/sectionRegistry';
+import { PROJECT_META } from "../data/projectMeta";
+import { SECTION_REGISTRY } from "../data/sectionRegistry";
 
 // ─── Scoring-Based Intent Matching ───────────────────────────────
 //
@@ -20,9 +20,24 @@ const MIN_SCORE_THRESHOLD = 1;
 const HIGH_CONFIDENCE_SCORE = 2.5;
 
 const NAVIGATION_TRIGGERS = [
-  'buka', 'open', 'lihat', 'show', 'go to', 'ke ', 'scroll', 'arahkan',
-  'pindah', 'take me', 'jump to', 'navigate', 'tunjukin', 'tampilkan',
-  'mau ke', 'ingin ke', 'ke bagian', 'ke section',
+  "buka",
+  "open",
+  "lihat",
+  "show",
+  "go to",
+  "ke ",
+  "scroll",
+  "arahkan",
+  "pindah",
+  "take me",
+  "jump to",
+  "navigate",
+  "tunjukin",
+  "tampilkan",
+  "mau ke",
+  "ingin ke",
+  "ke bagian",
+  "ke section",
 ];
 
 // ─── Off-Topic Detection ─────────────────────────────────────────
@@ -55,9 +70,9 @@ const ON_TOPIC_OVERRIDES = [
   /zickrian/i,
   /portofolio|portfolio/i,
   /project|projek|proyek/i,
-  ...PROJECT_META.flatMap(p => [
-    new RegExp(escapeRegex(p.slug), 'i'),
-    new RegExp(escapeRegex(p.title), 'i'),
+  ...PROJECT_META.flatMap((p) => [
+    new RegExp(escapeRegex(p.slug), "i"),
+    new RegExp(escapeRegex(p.title), "i"),
   ]),
 ];
 
@@ -65,7 +80,7 @@ const ON_TOPIC_OVERRIDES = [
 // Build search-friendly aliases from PROJECT_META so users can refer
 // to projects by partial name, slug, or word fragments.
 
-const PROJECT_ALIASES = PROJECT_META.map(p => ({
+const PROJECT_ALIASES = PROJECT_META.map((p) => ({
   slug: p.slug,
   title: p.title,
   id: p.id,
@@ -73,19 +88,34 @@ const PROJECT_ALIASES = PROJECT_META.map(p => ({
   searchTerms: [
     p.slug.toLowerCase(),
     p.title.toLowerCase(),
-    ...p.title.toLowerCase().split(/[\s-]+/).filter(w => w.length > 2),
+    ...p.title
+      .toLowerCase()
+      .split(/[\s-]+/)
+      .filter((w) => w.length > 2),
   ],
 }));
 
 const PROJECT_REFERENCE_TRIGGERS = [
-  'project', 'projek', 'proyek', 'detail', 'tentang', 'about', 'case study',
-  'show', 'lihat', 'buka', 'open', 'jelaskan', 'explain', 'ceritain',
+  "project",
+  "projek",
+  "proyek",
+  "detail",
+  "tentang",
+  "about",
+  "case study",
+  "show",
+  "lihat",
+  "buka",
+  "open",
+  "jelaskan",
+  "explain",
+  "ceritain",
 ];
 
 // ─── Utility Functions ───────────────────────────────────────────
 
 function escapeRegex(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /**
@@ -96,24 +126,24 @@ function escapeRegex(str) {
 function normalize(text) {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/[^a-z0-9\s-]/g, " ")
     .trim()
-    .replace(/\s+/g, ' ');
+    .replace(/\s+/g, " ");
 }
 
 function hasNavigationTrigger(normalizedMsg) {
-  return NAVIGATION_TRIGGERS.some(trigger => normalizedMsg.includes(trigger));
+  return NAVIGATION_TRIGGERS.some((trigger) => normalizedMsg.includes(trigger));
 }
 
 function wordCount(text) {
   if (!text) return 0;
-  return text.split(' ').filter(Boolean).length;
+  return text.split(" ").filter(Boolean).length;
 }
 
 function tokenize(text) {
   return normalize(text)
-    .split(' ')
-    .filter(token => token.length > 2);
+    .split(" ")
+    .filter((token) => token.length > 2);
 }
 
 function scoreProjectMention(normalizedMsg, project) {
@@ -129,7 +159,7 @@ function scoreProjectMention(normalizedMsg, project) {
 
   const msgTokens = tokenize(normalizedMsg);
   const projectTokens = tokenize(project.title).concat(tokenize(project.slug));
-  const overlap = msgTokens.filter(token => projectTokens.includes(token)).length;
+  const overlap = msgTokens.filter((token) => projectTokens.includes(token)).length;
   score += overlap * 1.5;
 
   return score;
@@ -152,7 +182,7 @@ function scoreSynonyms(normalizedMsg, synonyms) {
   let score = 0;
   for (const synonym of synonyms) {
     if (normalizedMsg.includes(synonym)) {
-      const wordCount = synonym.split(' ').length;
+      const wordCount = synonym.split(" ").length;
       // Base score (1) + specificity bonus (0.5 per extra word)
       score += 1 + (wordCount - 1) * 0.5;
     }
@@ -168,7 +198,7 @@ function scoreSynonyms(normalizedMsg, synonyms) {
  */
 function matchProjectIntent(normalizedMsg) {
   const hasOpenTrigger = hasNavigationTrigger(normalizedMsg);
-  const hasProjectContext = PROJECT_REFERENCE_TRIGGERS.some(t => normalizedMsg.includes(t));
+  const hasProjectContext = PROJECT_REFERENCE_TRIGGERS.some((t) => normalizedMsg.includes(t));
 
   let best = null;
   let secondBest = null;
@@ -242,17 +272,17 @@ function matchSectionIntent(normalizedMsg) {
  * @param {string} [lang='id'] - Detected language ('id' or 'en')
  * @returns {string | null}
  */
-export function detectOffTopic(userMessage, lang = 'id') {
+export function detectOffTopic(userMessage, lang = "id") {
   const msg = normalize(userMessage);
 
   // On-topic overrides take priority
-  const isOverridden = ON_TOPIC_OVERRIDES.some(pattern => pattern.test(msg));
+  const isOverridden = ON_TOPIC_OVERRIDES.some((pattern) => pattern.test(msg));
   if (isOverridden) return null;
 
-  const isOffTopic = OFF_TOPIC_PATTERNS.some(pattern => pattern.test(msg));
+  const isOffTopic = OFF_TOPIC_PATTERNS.some((pattern) => pattern.test(msg));
   if (!isOffTopic) return null;
 
-  return lang === 'en'
+  return lang === "en"
     ? "Hey, that's outside my portfolio scope! Feel free to ask about my projects, skills, or experience."
     : "Wah, itu di luar konteks portofolio saya. Tanya aja soal project, skill, atau pengalaman saya!";
 }
@@ -266,17 +296,46 @@ export function detectOffTopic(userMessage, lang = 'id') {
  */
 export function detectLanguage(userMessage) {
   const indonesianMarkers = [
-    'apa', 'siapa', 'dimana', 'bagaimana', 'gimana', 'kapan',
-    'bisa', 'buka', 'lihat', 'tolong', 'kasih', 'tahu',
-    'ceritakan', 'jelaskan', 'tentang', 'nya', 'aku', 'kamu',
-    'dia', 'saya', 'kalau', 'yang', 'dan', 'atau', 'ini', 'itu',
-    'mau', 'ingin', 'dong', 'deh', 'sih', 'aja', 'gak', 'nggak',
+    "apa",
+    "siapa",
+    "dimana",
+    "bagaimana",
+    "gimana",
+    "kapan",
+    "bisa",
+    "buka",
+    "lihat",
+    "tolong",
+    "kasih",
+    "tahu",
+    "ceritakan",
+    "jelaskan",
+    "tentang",
+    "nya",
+    "aku",
+    "kamu",
+    "dia",
+    "saya",
+    "kalau",
+    "yang",
+    "dan",
+    "atau",
+    "ini",
+    "itu",
+    "mau",
+    "ingin",
+    "dong",
+    "deh",
+    "sih",
+    "aja",
+    "gak",
+    "nggak",
   ];
 
-  const words = normalize(userMessage).split(' ');
-  const idCount = words.filter(w => indonesianMarkers.includes(w)).length;
+  const words = normalize(userMessage).split(" ");
+  const idCount = words.filter((w) => indonesianMarkers.includes(w)).length;
 
-  return idCount >= 1 ? 'id' : 'en';
+  return idCount >= 1 ? "id" : "en";
 }
 
 /**
@@ -298,7 +357,7 @@ export function resolveAction(userMessage) {
   const projectMatch = matchProjectIntent(msg);
   if (projectMatch) {
     return {
-      action: 'open_project',
+      action: "open_project",
       params: { project_name: projectMatch.slug },
     };
   }

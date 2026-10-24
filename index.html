@@ -1,75 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="https://zickrian.dev/" />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="apple-touch-icon" href="/favicon.svg" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="canonical" href="https://zickrian.dev/" />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300..700&display=swap"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300..700&display=swap"
+      />
+    </noscript>
+    <link rel="preload" as="image" type="image/webp" href="/profile.webp" />
 
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
-  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300..700&display=swap"
-    onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300..700&display=swap">
-  </noscript>
-  <link rel="preload" as="image" type="image/webp" href="/profile.webp">
+    <title>FIRDAUS KHOTIBUL ZICKRIAN</title>
+    <meta name="title" content="FIRDAUS KHOTIBUL ZICKRIAN" />
+    <meta
+      name="description"
+      content="Portfolio of Firdaus Khotibul Zickrian. AI Engineer and Full-Stack Developer specializing in Machine Learning, Deep Learning, and Modern Web Technologies. Based in Indonesia."
+    />
+    <meta
+      name="keywords"
+      content="AI Engineer, Full-Stack Developer, Machine Learning, Deep Learning, React, Python, Data Science, Portfolio, Zickrian, Firdaus Khotibul Zickrian"
+    />
+    <meta name="author" content="Firdaus Khotibul Zickrian" />
 
-  <title>FIRDAUS KHOTIBUL ZICKRIAN</title>
-  <meta name="title" content="FIRDAUS KHOTIBUL ZICKRIAN">
-  <meta name="description"
-    content="Portfolio of Firdaus Khotibul Zickrian. AI Engineer and Full-Stack Developer specializing in Machine Learning, Deep Learning, and Modern Web Technologies. Based in Indonesia.">
-  <meta name="keywords"
-    content="AI Engineer, Full-Stack Developer, Machine Learning, Deep Learning, React, Python, Data Science, Portfolio, Zickrian, Firdaus Khotibul Zickrian">
-  <meta name="author" content="Firdaus Khotibul Zickrian">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zickrian.com/" />
+    <meta property="og:title" content="FIRDAUS KHOTIBUL ZICKRIAN" />
+    <meta
+      property="og:description"
+      content="Building intelligent systems that learn, adapt, and solve complex problems. Check out my portfolio showcasing AI and Web Development projects."
+    />
+    <meta property="og:image" content="/og-icon.png" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zickrian.com/">
-  <meta property="og:title" content="FIRDAUS KHOTIBUL ZICKRIAN">
-  <meta property="og:description"
-    content="Building intelligent systems that learn, adapt, and solve complex problems. Check out my portfolio showcasing AI and Web Development projects.">
-  <meta property="og:image" content="/og-icon.png">
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="https://zickrian.com/" />
+    <meta property="twitter:title" content="FIRDAUS KHOTIBUL ZICKRIAN" />
+    <meta
+      property="twitter:description"
+      content="Building intelligent systems that learn, adapt, and solve complex problems. Check out my portfolio showcasing AI and Web Development projects."
+    />
+    <meta property="twitter:image" content="/og-icon.png" />
 
-  <meta property="twitter:card" content="summary">
-  <meta property="twitter:url" content="https://zickrian.com/">
-  <meta property="twitter:title" content="FIRDAUS KHOTIBUL ZICKRIAN">
-  <meta property="twitter:description"
-    content="Building intelligent systems that learn, adapt, and solve complex problems. Check out my portfolio showcasing AI and Web Development projects.">
-  <meta property="twitter:image" content="/og-icon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Firdaus Khotibul Zickrian",
+        "alternateName": "Zickrian",
+        "url": "https://zickrian.com",
+        "jobTitle": "AI Engineer & Full-Stack Developer",
+        "knowsAbout": [
+          "Machine Learning",
+          "Deep Learning",
+          "React",
+          "Python",
+          "Data Science",
+          "Full-Stack Development"
+        ],
+        "sameAs": ["https://github.com/zickrian", "https://linkedin.com/in/zickrian"]
+      }
+    </script>
+  </head>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Firdaus Khotibul Zickrian",
-    "alternateName": "Zickrian",
-    "url": "https://zickrian.com",
-    "jobTitle": "AI Engineer & Full-Stack Developer",
-    "knowsAbout": ["Machine Learning", "Deep Learning", "React", "Python", "Data Science", "Full-Stack Development"],
-    "sameAs": [
-      "https://github.com/zickrian",
-      "https://linkedin.com/in/zickrian"
-    ]
-  }
-  </script>
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <script type="module" src="/src/index.js"></script>
-</body>
-
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/index.js"></script>
+  </body>
 </html>

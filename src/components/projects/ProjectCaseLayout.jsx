@@ -4,11 +4,11 @@ import { ArrowUpRight, Github, Globe } from "lucide-react";
 // Helper: inject Cloudinary automatic format & quality + width
 function cloudinarySrc(originalUrl, width) {
   try {
-    if (!originalUrl || typeof originalUrl !== 'string') return originalUrl;
-    if (!originalUrl.includes('/upload/')) return originalUrl;
+    if (!originalUrl || typeof originalUrl !== "string") return originalUrl;
+    if (!originalUrl.includes("/upload/")) return originalUrl;
     // Avoid double-injecting transforms
-    if (originalUrl.includes('f_auto') || originalUrl.includes('q_auto')) return originalUrl;
-    return originalUrl.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
+    if (originalUrl.includes("f_auto") || originalUrl.includes("q_auto")) return originalUrl;
+    return originalUrl.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
   } catch {
     return originalUrl;
   }
@@ -28,8 +28,9 @@ export default function ProjectCaseLayout({
   mode,
 }) {
   return (
-    <div className={`bg-[#FAF9F6] text-black font-sans selection:bg-lime-400 selection:text-black overflow-x-hidden ${mode === 'page' ? 'min-h-screen' : 'h-full flex flex-col'}`}>
-
+    <div
+      className={`bg-[#FAF9F6] text-black font-sans selection:bg-lime-400 selection:text-black overflow-x-hidden ${mode === "page" ? "min-h-screen" : "h-full flex flex-col"}`}
+    >
       {/* ── Sticky header ─────────────────────── */}
       <div className="sticky top-0 z-40 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-black/5">
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
@@ -64,9 +65,14 @@ export default function ProjectCaseLayout({
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tighter text-black mb-6"
           >
-            {project.title.split(' ').map((word, i, arr) => (
-              <span key={i} className={i === arr.length - 1 ? "text-transparent" : ""} style={i === arr.length - 1 ? { WebkitTextStroke: '2px black' } : {}}>
-                {word}{i !== arr.length - 1 ? ' ' : ''}
+            {project.title.split(" ").map((word, i, arr) => (
+              <span
+                key={i}
+                className={i === arr.length - 1 ? "text-transparent" : ""}
+                style={i === arr.length - 1 ? { WebkitTextStroke: "2px black" } : {}}
+              >
+                {word}
+                {i !== arr.length - 1 ? " " : ""}
               </span>
             ))}
           </Gsap.h1>
@@ -87,14 +93,22 @@ export default function ProjectCaseLayout({
             className="mt-10 flex flex-wrap justify-center gap-4"
           >
             {project.links?.live && (
-              <a href={project.links.live} target="_blank" rel="noreferrer"
-                className="bg-lime-400 text-black px-8 py-3.5 font-bold uppercase text-xs tracking-wider hover:bg-black hover:text-white transition-all duration-300 rounded-[2px] flex items-center gap-2 shadow-sm">
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-lime-400 text-black px-8 py-3.5 font-bold uppercase text-xs tracking-wider hover:bg-black hover:text-white transition-all duration-300 rounded-[2px] flex items-center gap-2 shadow-sm"
+              >
                 <Globe size={16} /> View Live
               </a>
             )}
             {project.links?.repo && (
-              <a href={project.links.repo} target="_blank" rel="noreferrer"
-                className="bg-black/5 text-black px-8 py-3.5 font-bold uppercase text-xs tracking-wider border border-transparent hover:border-black/20 transition-all duration-300 rounded-[2px] flex items-center gap-2">
+              <a
+                href={project.links.repo}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-black/5 text-black px-8 py-3.5 font-bold uppercase text-xs tracking-wider border border-transparent hover:border-black/20 transition-all duration-300 rounded-[2px] flex items-center gap-2"
+              >
                 <Github size={16} /> Repository
               </a>
             )}
@@ -114,10 +128,10 @@ export default function ProjectCaseLayout({
                 <img
                   src={cloudinarySrc(project.heroImg, 1200)}
                   srcSet={[
-                    cloudinarySrc(project.heroImg, 600) + ' 600w',
-                    cloudinarySrc(project.heroImg, 900) + ' 900w',
-                    cloudinarySrc(project.heroImg, 1200) + ' 1200w',
-                  ].join(', ')}
+                    cloudinarySrc(project.heroImg, 600) + " 600w",
+                    cloudinarySrc(project.heroImg, 900) + " 900w",
+                    cloudinarySrc(project.heroImg, 1200) + " 1200w",
+                  ].join(", ")}
                   sizes="(max-width: 768px) 100vw, 1152px"
                   alt={project.title}
                   loading="lazy"
@@ -130,13 +144,11 @@ export default function ProjectCaseLayout({
         )}
 
         <section className="max-w-5xl mx-auto px-6 md:px-10 pb-24">
-
           {/* Custom Section Block */}
           {preFeatureSection}
 
           {/* Main Grid: Features and Impact side-by-side on desktop */}
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 mt-16 border-t border-black/10 pt-16">
-
             {/* ── Left Column: Features ──── */}
             <div className="space-y-16">
               {project.features && project.features.length > 0 && (

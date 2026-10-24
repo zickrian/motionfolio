@@ -3,7 +3,8 @@ import ProjectCaseLayout from "../components/projects/ProjectCaseLayout";
 export const project = {
   title: "Diabetes Classification",
   category: "AI / Machine Learning",
-  heroImg: "https://res.cloudinary.com/demlxsf08/image/upload/v1766488152/diabet_clasification_owt8nr.png",
+  heroImg:
+    "https://res.cloudinary.com/demlxsf08/image/upload/v1766488152/diabet_clasification_owt8nr.png",
   tagline:
     "A Machine Learning-based diabetes classification app that predicts diabetes risk from patient data, packaged in a simple, fast, and user-friendly web interface.",
   year: "2025",
@@ -34,5 +35,12 @@ export const project = {
 };
 
 export default function DiabetesClassificationDetail({ onClose, mode }) {
-  return <ProjectCaseLayout project={project} onClose={onClose} closeLabel={mode === "modal" ? "Close" : "Back to Home"} mode={mode} />;
+  return (
+    <ProjectCaseLayout
+      project={project}
+      onClose={onClose}
+      closeLabel={mode === "modal" ? "Close" : "Back to Home"}
+      mode={mode}
+    />
+  );
 }

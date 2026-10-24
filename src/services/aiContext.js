@@ -1,7 +1,7 @@
-import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { getSectionLabels } from '../data/sectionRegistry';
-import { PROJECT_DETAILS_DATA } from '../data/projectDetailsData';
-import { PROJECT_META } from '../data/projectMeta';
+import { PORTFOLIO_DATA } from "../data/portfolioData";
+import { getSectionLabels } from "../data/sectionRegistry";
+import { PROJECT_DETAILS_DATA } from "../data/projectDetailsData";
+import { PROJECT_META } from "../data/projectMeta";
 
 // ─── Project Knowledge Base ──────────────────────────────────────
 // Uses pure data objects (no JSX) to avoid pulling React components
@@ -18,8 +18,8 @@ const PROJECT_DETAILS = PROJECT_DETAILS_DATA;
  */
 function serializeExperience() {
   return PORTFOLIO_DATA.experience
-    .map(exp => `- ${exp.title} (${exp.period}): ${exp.description.join(' ')}`)
-    .join('\n');
+    .map((exp) => `- ${exp.title} (${exp.period}): ${exp.description.join(" ")}`)
+    .join("\n");
 }
 
 /**
@@ -33,8 +33,8 @@ function serializeTechStack() {
     grouped[tech.category].push(tech.name);
   }
   return Object.entries(grouped)
-    .map(([category, techs]) => `- ${category}: ${techs.join(', ')}`)
-    .join('\n');
+    .map(([category, techs]) => `- ${category}: ${techs.join(", ")}`)
+    .join("\n");
 }
 
 /**
@@ -43,18 +43,22 @@ function serializeTechStack() {
  */
 function serializeProjects() {
   return Object.entries(PROJECT_DETAILS)
-    .map(([slug, p]) => [
-      `Project: ${p.title} (slug: ${slug})`,
-      `Category: ${p.category}`,
-      `Tagline: ${p.tagline}`,
-      `Year: ${p.year || 'N/A'}`,
-      `Stack: ${p.stack.join(', ')}`,
-      `Features: ${p.features.join('; ')}`,
-      `Impact: ${p.impact.join('; ')}`,
-      `Links: Live (${p.links.live || 'N/A'}), Repo (${p.links.repo || 'N/A'})`,
-      p.notes ? `Notes: ${p.notes}` : '',
-    ].filter(Boolean).join('\n'))
-    .join('\n---\n');
+    .map(([slug, p]) =>
+      [
+        `Project: ${p.title} (slug: ${slug})`,
+        `Category: ${p.category}`,
+        `Tagline: ${p.tagline}`,
+        `Year: ${p.year || "N/A"}`,
+        `Stack: ${p.stack.join(", ")}`,
+        `Features: ${p.features.join("; ")}`,
+        `Impact: ${p.impact.join("; ")}`,
+        `Links: Live (${p.links.live || "N/A"}), Repo (${p.links.repo || "N/A"})`,
+        p.notes ? `Notes: ${p.notes}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    )
+    .join("\n---\n");
 }
 
 /**
@@ -62,20 +66,24 @@ function serializeProjects() {
  * @returns {string}
  */
 function serializeAchievements() {
-  if (!PORTFOLIO_DATA.achievements?.length) return 'No achievements listed.';
+  if (!PORTFOLIO_DATA.achievements?.length) return "No achievements listed.";
   return PORTFOLIO_DATA.achievements
-    .map(a => [
-      `- ${a.title}`,
-      `  Project: ${a.project}`,
-      `  Description: ${a.description}`,
-      `  Team: ${a.team}`,
-      `  Track: ${a.track}`,
-      `  Tech: ${a.techStack.join(', ')}`,
-      a.links?.live ? `  Live: ${a.links.live}` : '',
-      a.links?.github ? `  Repo: ${a.links.github}` : '',
-      a.links?.devfolio ? `  Devfolio: ${a.links.devfolio}` : '',
-    ].filter(Boolean).join('\n'))
-    .join('\n');
+    .map((a) =>
+      [
+        `- ${a.title}`,
+        `  Project: ${a.project}`,
+        `  Description: ${a.description}`,
+        `  Team: ${a.team}`,
+        `  Track: ${a.track}`,
+        `  Tech: ${a.techStack.join(", ")}`,
+        a.links?.live ? `  Live: ${a.links.live}` : "",
+        a.links?.github ? `  Repo: ${a.links.github}` : "",
+        a.links?.devfolio ? `  Devfolio: ${a.links.devfolio}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    )
+    .join("\n");
 }
 
 /**
@@ -83,12 +91,12 @@ function serializeAchievements() {
  * @returns {string}
  */
 function serializeCapabilities() {
-  if (!PORTFOLIO_DATA.capabilities?.length) return 'No capabilities listed.';
-  return PORTFOLIO_DATA.capabilities.map(c => `- ${c}`).join('\n');
+  if (!PORTFOLIO_DATA.capabilities?.length) return "No capabilities listed.";
+  return PORTFOLIO_DATA.capabilities.map((c) => `- ${c}`).join("\n");
 }
 
 function normalize(text) {
-  return (text || '').toLowerCase().trim();
+  return (text || "").toLowerCase().trim();
 }
 
 function scoreProjectRelevance(query, slug, detail) {
@@ -96,9 +104,9 @@ function scoreProjectRelevance(query, slug, detail) {
   if (!q) return 0;
 
   let score = 0;
-  const title = detail?.title?.toLowerCase() || '';
-  const category = detail?.category?.toLowerCase() || '';
-  const tags = (detail?.stack || []).map(item => item.toLowerCase());
+  const title = detail?.title?.toLowerCase() || "";
+  const category = detail?.category?.toLowerCase() || "";
+  const tags = (detail?.stack || []).map((item) => item.toLowerCase());
 
   if (q.includes(slug.toLowerCase())) score += 5;
   if (title && q.includes(title)) score += 4;
@@ -116,43 +124,48 @@ function scoreProjectRelevance(query, slug, detail) {
 
 export function buildScopedContext(userMessage) {
   const query = normalize(userMessage);
-  if (!query) return '';
+  if (!query) return "";
 
   const relevantProjects = Object.entries(PROJECT_DETAILS)
     .map(([slug, detail]) => ({ slug, detail, score: scoreProjectRelevance(query, slug, detail) }))
-    .filter(item => item.score >= 2)
+    .filter((item) => item.score >= 2)
     .sort((a, b) => b.score - a.score)
     .slice(0, 2);
 
   const projectSection = relevantProjects.length
     ? relevantProjects
-      .map(({ slug, detail }) => [
-        `- ${detail.title} (slug: ${slug})`,
-        `  Category: ${detail.category}`,
-        `  Key stack: ${(detail.stack || []).slice(0, 6).join(', ')}`,
-        `  Top features: ${(detail.features || []).slice(0, 3).join('; ')}`,
-      ].join('\n'))
-      .join('\n')
-    : '- No highly matched project; prioritize concise profile-level answers.';
+        .map(({ slug, detail }) =>
+          [
+            `- ${detail.title} (slug: ${slug})`,
+            `  Category: ${detail.category}`,
+            `  Key stack: ${(detail.stack || []).slice(0, 6).join(", ")}`,
+            `  Top features: ${(detail.features || []).slice(0, 3).join("; ")}`,
+          ].join("\n"),
+        )
+        .join("\n")
+    : "- No highly matched project; prioritize concise profile-level answers.";
 
-  const metaMatches = PROJECT_META
-    .filter(project => query.includes(project.slug.toLowerCase()) || query.includes(project.title.toLowerCase()))
-    .slice(0, 3)
-    .map(project => `- ${project.title} (${project.slug})`)
-    .join('\n') || '- No direct project mention found.';
+  const metaMatches =
+    PROJECT_META.filter(
+      (project) =>
+        query.includes(project.slug.toLowerCase()) || query.includes(project.title.toLowerCase()),
+    )
+      .slice(0, 3)
+      .map((project) => `- ${project.title} (${project.slug})`)
+      .join("\n") || "- No direct project mention found.";
 
   return [
-    '### QUERY-FOCUSED CONTEXT',
-    '- Use this section to prioritize relevant facts only.',
-    '- Never invent numbers, awards, dates, links, or technologies beyond provided data.',
-    '- If data is missing, explicitly say it is not listed yet.',
-    '',
-    'Matched project hints:',
+    "### QUERY-FOCUSED CONTEXT",
+    "- Use this section to prioritize relevant facts only.",
+    "- Never invent numbers, awards, dates, links, or technologies beyond provided data.",
+    "- If data is missing, explicitly say it is not listed yet.",
+    "",
+    "Matched project hints:",
     metaMatches,
-    '',
-    'Relevant detailed project context:',
+    "",
+    "Relevant detailed project context:",
     projectSection,
-  ].join('\n');
+  ].join("\n");
 }
 
 // ─── System Prompt Generator ─────────────────────────────────────

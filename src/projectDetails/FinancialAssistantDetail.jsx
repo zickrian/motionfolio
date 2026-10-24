@@ -3,7 +3,8 @@ import ProjectCaseLayout from "../components/projects/ProjectCaseLayout";
 export const project = {
   title: "Financial Assistant Bot",
   category: "AI / Fintech",
-  heroImg: "https://res.cloudinary.com/dujp9ydkx/image/upload/f_auto,q_auto/v1771095429/Screenshot_from_2026-02-15_01-49-09_q6icfy",
+  heroImg:
+    "https://res.cloudinary.com/dujp9ydkx/image/upload/f_auto,q_auto/v1771095429/Screenshot_from_2026-02-15_01-49-09_q6icfy",
   tagline:
     "A personal AI-powered financial assistant on Telegram that automatically tracks expenses & income using RAG technology and OCR.",
   year: "2026",

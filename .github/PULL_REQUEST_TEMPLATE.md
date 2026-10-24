@@ -14,8 +14,8 @@ Closes #(issue number, if applicable)
 
 ## Changes
 
-- 
-- 
+-
+-
 
 ## How was this tested?
 
